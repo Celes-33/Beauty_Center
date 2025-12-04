@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Beauty Center - Blogs de Belleza</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Beauty Center</h1>
+      <p>Tu lugar favorito para descubrir tips de belleza</p>
+      <div style="position: absolute; top: 25px; right: 30px">
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Buscar..."
+          style="
+            padding: 8px 70px;
+            border-radius: 20px;
+            border: none;
+            box-shadow: 0 2px 4px #d36fa3;
+            outline: none;
+          "
+        />
+      </div>
+    </header>
+
+    <div class="container">
+      <section class="intro">
+        <h2>Bienvenida a Beauty Center</h2>
+        <p>
+          Aquí encontrarás los mejores blogs pensados especialmente para chicas
+          adolescentes que aman el maquillaje, el skincare, la moda y todo lo
+          relacionado con la belleza. ¡Explora, aprende y déjate inspirar por
+          las últimas tendencias!
+        </p>
+      </section>
+
+      <section class="blogs">
+        <div class="card">
+          <h3>Guía de Skincare para Principiantes</h3>
+          <p>
+            Descubre cómo empezar tu rutina de cuidado facial con productos
+            sencillos y efectivos para mantener tu piel suave y radiante.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Maquillaje Natural para el Día</h3>
+          <p>
+            Aprende a lograr un look fresco y juvenil perfecto para el colegio o
+            para salir con tus amigas.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Peinados Fáciles y Bonitos</h3>
+          <p>
+            Tres peinados rápidos que puedes hacer en menos de 10 minutos y que
+            combinan con cualquier outfit.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Tendencias de Moda 2025</h3>
+          <p>
+            Conoce cuáles son los colores, estilos y accesorios que estarán
+            marcando la tendencia este año.
+          </p>
+        </div>
+      </section>
+    </div>
+
+    <div class="container">
+      <section class="intro">
+        <h2>Blogs que te han gustado</h2>
+        <p>Aquí aparecerán los artículos que marcaste con corazón.</p>
+        <div id="favBlogs" class="blogs"></div>
+      </section>
+    </div>
+
+    <footer>© 2025 Beauty Center - Blogs de Belleza</footer>
+    <script>
+      // Simulación de base de datos local usando localStorage
+      // --- BUSCADOR ---
+      const searchInput = document.getElementById("searchInput");
+      if (searchInput) {
+        searchInput.addEventListener("input", () => {
+          const term = searchInput.value.toLowerCase();
+          const cards = document.querySelectorAll(".blogs .card");
+          cards.forEach((card) => {
+            const text = card.innerText.toLowerCase();
+            card.style.display = text.includes(term) ? "block" : "none";
+          });
+        });
+      }
+      // Simulación de base de datos local usando localStorage
+      document.addEventListener("DOMContentLoaded", () => {
+        const cards = document.querySelectorAll(".card");
+
+        cards.forEach((card, index) => {
+          const heart = document.createElement("span");
+          heart.innerHTML = "🤍";
+          heart.style.fontSize = "24px";
+          heart.style.cursor = "pointer";
+          heart.style.float = "right";
+
+          const savedLikes =
+            JSON.parse(localStorage.getItem("likedBlogs")) || [];
+          if (savedLikes.includes(index)) heart.innerHTML = "❤️";
+
+          heart.addEventListener("click", () => {
+            const liked = JSON.parse(localStorage.getItem("likedBlogs")) || [];
+
+            if (liked.includes(index)) {
+              liked.splice(liked.indexOf(index), 1);
+              heart.innerHTML = "🤍";
+            } else {
+              liked.push(index);
+              heart.innerHTML = "❤️";
+            }
+            localStorage.setItem("likedBlogs", JSON.stringify(liked));
+            renderFavorites();
+          });
+
+          card.prepend(heart);
+        });
+
+        renderFavorites();
+      });
+
+      function renderFavorites() {
+        const container = document.getElementById("favBlogs");
+        container.innerHTML = "";
+        const liked = JSON.parse(localStorage.getItem("likedBlogs")) || [];
+        const cards = document.querySelectorAll(".card");
+
+        liked.forEach((index) => {
+          const clone = cards[index].cloneNode(true);
+          clone.querySelector("span").remove();
+          container.appendChild(clone);
+        });
+      }
+    </script>
+
+    
+  </body>
+</html>

@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background-color: #fde7f3; /* rosa pastel */
+  color: #333;
+}
+
+header {
+  background-color: #f8c9df;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 3rem;
+  color: #d36fa3;
+  margin: 0;
+}
+
+header p {
+  font-size: 1.2rem;
+  margin-top: 5px;
+  color: #b05b89;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+}
+
+.intro {
+  background: #ffe3ef;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.intro h2 {
+  color: #d36fa3;
+}
+
+.blogs {
+  display: grid;
+  gap: 20px;
+  margin-top: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.card {
+  background: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #d36fa3;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #f8c9df;
+  margin-top: 40px;
+  color: #b05b89;
+}
